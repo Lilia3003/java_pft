@@ -10,11 +10,11 @@ Rectangle r = new Rectangle(4,5);
 
     System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
-Point p1 = new Point(1,1);
+Point p1 = new Point(-1.5,2);
 
-Point p2 = new Point(1, 1);
+Point p2 = new Point(3, -0.5);
 
-    System.out.println("Расстояние между точками p1(" + p1.x + ";" + p1.y + ") и p2 (" + p2.x + ";" + p2.y +") равно " + p1.distance(p1, p2));
+    System.out.println("Расстояние между точками p1(" + p1.x + ";" + p1.y + ") и p2 (" + p2.x + ";" + p2.y +") равно " + p1.distance(p2));
 
   }
 
