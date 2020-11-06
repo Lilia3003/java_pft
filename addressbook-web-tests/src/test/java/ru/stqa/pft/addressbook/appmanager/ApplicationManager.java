@@ -11,9 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   public WebDriver wd;
-private SessionHelper sessionHelper;
-
-  private  NavigationHelper navigationHelper;
+  private SessionHelper sessionHelper;
+  private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public void init() {
@@ -27,14 +26,13 @@ private SessionHelper sessionHelper;
   }
 
 
-
   public void stop() {
     wd.quit();
   }
 
   private boolean isElementPresent(By by) {
     try {
-      groupHelper.wd.findElement(by);
+      wd.findElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
@@ -43,7 +41,7 @@ private SessionHelper sessionHelper;
 
   private boolean isAlertPresent() {
     try {
-      groupHelper.wd.switchTo().alert();
+      wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
       return false;
@@ -51,33 +49,33 @@ private SessionHelper sessionHelper;
   }
 
   public void returnToHomePage() {
-    groupHelper.wd.findElement(By.linkText("home page")).click();
+    wd.findElement(By.linkText("home page")).click();
   }
 
   public void submitContactCreation() {
-    groupHelper.wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
   public void fillContactForm(ContactData contactData) {
-    groupHelper.wd.findElement(By.name("firstname")).click();
-    groupHelper.wd.findElement(By.name("firstname")).clear();
-    groupHelper.wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-    groupHelper.wd.findElement(By.name("lastname")).click();
-    groupHelper.wd.findElement(By.name("lastname")).clear();
-    groupHelper.wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-    groupHelper.wd.findElement(By.name("address")).click();
-    groupHelper.wd.findElement(By.name("address")).clear();
-    groupHelper.wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-    groupHelper.wd.findElement(By.name("home")).click();
-    groupHelper.wd.findElement(By.name("home")).clear();
-    groupHelper.wd.findElement(By.name("home")).sendKeys(contactData.getPhone());
-    groupHelper.wd.findElement(By.name("email")).click();
-    groupHelper.wd.findElement(By.name("email")).clear();
-    groupHelper.wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+    wd.findElement(By.name("address")).click();
+    wd.findElement(By.name("address")).clear();
+    wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name("home")).sendKeys(contactData.getPhone());
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
   }
 
   public void gotoAddNewContactPage() {
-    groupHelper.wd.findElement(By.linkText("add new")).click();
+    wd.findElement(By.linkText("add new")).click();
   }
 
   public GroupHelper getGroupHelper() {
