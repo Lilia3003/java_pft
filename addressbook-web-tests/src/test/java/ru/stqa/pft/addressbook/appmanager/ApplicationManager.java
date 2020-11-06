@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   public WebDriver wd;
-
   private ContactHelper contactHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
@@ -48,10 +47,6 @@ public class ApplicationManager {
     } catch (NoAlertPresentException e) {
       return false;
     }
-  }
-
-  public void returnToHomePage() {
-    wd.findElement(By.linkText("home page")).click();
   }
 
   public GroupHelper getGroupHelper() {
