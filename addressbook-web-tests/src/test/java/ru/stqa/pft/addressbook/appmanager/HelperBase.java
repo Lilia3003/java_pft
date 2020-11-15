@@ -9,6 +9,7 @@ public class HelperBase {
   public WebDriver wd;
 
   public HelperBase(WebDriver wd) {
+
     this.wd = wd;
   }
 
