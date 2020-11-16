@@ -22,14 +22,14 @@ public class ApplicationManager {
   }
 
   public void init() {
-    if (browser.equals(BrowserType.FIREFOX)){
+    if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
-    } else if(browser.equals(BrowserType.CHROME)){
+    } else if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
-    } else if(browser.equals(BrowserType.IE)) {
+    } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
-    wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
