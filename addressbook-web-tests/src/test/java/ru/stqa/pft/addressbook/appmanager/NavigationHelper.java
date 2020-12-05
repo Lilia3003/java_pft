@@ -18,10 +18,11 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void returnToHomePage() {
+  public void returnToHomePage() throws InterruptedException {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
     click(By.linkText("home page"));
+    Thread.sleep(3000);
   }
 }
