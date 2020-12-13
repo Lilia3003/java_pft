@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ModificationContactTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactModification() throws InterruptedException {
     if (!app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("Name", "LastName", "address", "22-22-22", "test@mail.ru", "1"), true);
