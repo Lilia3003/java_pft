@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class DeleteContactTests extends TestBase {
   @Test
