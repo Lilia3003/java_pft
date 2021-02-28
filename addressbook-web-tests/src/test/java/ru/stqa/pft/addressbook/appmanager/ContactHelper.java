@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -26,32 +28,39 @@ public class ContactHelper extends HelperBase {
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getPhone());
     type(By.name("email"), contactData.getEmail());
-    if (creation) {
+    /*if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+    }*/
   }
 
   public void gotoAddNewContactPage() {
     click(By.linkText("add new"));
   }
 
+
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
+
+
 
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
   }
 
   public void acceptAlertDeletionContact() throws InterruptedException {
-    wd.switchTo().alert().accept();
-    Thread.sleep(3000);
+    /*wd.switchTo().alert().accept();*/
+    Thread.sleep(1000);
   }
 
   public void initContactModification(int index) {
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+  }
+
+  public void initContactModificationById(int id) {
+    wd.findElement(By.xpath("//a[@href='edit.php?id=" + id + "']")).click();
   }
 
   public void submitContactModification() {
@@ -64,14 +73,20 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
-  public void modify(int index, ContactData contact) {
-    initContactModification(index);
+  public void modify(ContactData contact) {
+    initContactModificationById(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
   }
 
   public void delete(int index) throws InterruptedException {
-    selectContact(index);
+    initContactModification(index);
+    deleteSelectedContact();
+    acceptAlertDeletionContact();
+  }
+
+  public void delete(ContactData contact) throws InterruptedException {
+    initContactModificationById(contact.getId());
     deleteSelectedContact();
     acceptAlertDeletionContact();
   }
@@ -85,7 +100,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
@@ -95,4 +110,17 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
+
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    for (WebElement element : elements) {
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+    }
+    return contacts;
+  }
+
 }
