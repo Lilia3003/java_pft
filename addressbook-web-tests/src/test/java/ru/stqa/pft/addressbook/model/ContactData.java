@@ -10,6 +10,9 @@ public class ContactData {
   private String address;
   private String phone;
   private String email;
+  private String home;
+  private String mobile;
+  private String work;
 
   @Override
   public boolean equals(Object o) {
@@ -68,6 +71,21 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withHomePhone(String home) {
+    this.home = home;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String work) {
+    this.work = work;
+    return this;
+  }
+
   public String getFirstname() {
     return firstname;
   }
@@ -92,6 +110,12 @@ public class ContactData {
     return group;
   }
 
+  public String getHome() { return home; }
+
+  public String getMobile() { return mobile; }
+
+  public String getWork() { return work; }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -100,5 +124,7 @@ public class ContactData {
             ", lastname='" + lastname + '\'' +
             '}';
   }
+
+
 
 }
