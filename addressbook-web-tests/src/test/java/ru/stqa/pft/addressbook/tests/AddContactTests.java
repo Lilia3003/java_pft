@@ -13,7 +13,7 @@ public class AddContactTests extends TestBase {
   @Test
   public void testAddContact() throws Exception {
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFirstname("NameХ").withLastname("LastNameХ").withAddress("address").withPhone("22-22-22").withEmail("test@mail.ru").withGroup("1");
+    ContactData contact = new ContactData().withFirstname("NameХ").withLastname("LastNameХ").withHomePhone("homePhone").withMobilePhone("mobilePhone").withWorkPhone("workPhone").withAddress("address").withEmail("test@mail.ru").withGroup("1");
     app.contact().create(contact, true);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -26,7 +26,7 @@ public class AddContactTests extends TestBase {
   @Test
   public void testBadAddContact() throws Exception {
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFirstname("NameХ'").withLastname("LastNameХ").withAddress("address").withPhone("22-22-22").withEmail("test@mail.ru").withGroup("1");
+    ContactData contact = new ContactData().withFirstname("NameХ'").withLastname("LastNameХ").withAddress("address").withEmail("test@mail.ru").withGroup("1");
     app.contact().create(contact, true);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size()));
