@@ -1,23 +1,35 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddContactTests extends TestBase {
 
+  @DataProvider
+  public Iterator<Object[]> validContacts(){
+    List<Object[]> list = new ArrayList<Object[]>();
+    list.add(new Object[]{new ContactData().withFirstname("Firstname1").withLastname("Lastname 1").withAddress("Address 1").withEmail("Email1@mail.ru").withGroup("Group1")});
+    list.add(new Object[]{new ContactData().withFirstname("Firstname2").withLastname("Lastname 2").withAddress("Address 2").withEmail("Email2@mail.ru").withGroup("Group2")});
+    list.add(new Object[]{new ContactData().withFirstname("Firstname3").withLastname("Lastname 3").withAddress("Address 3").withEmail("Email3@mail.ru").withGroup("Group3")});
 
-  @Test
-  public void testAddContact() throws Exception {
+
+    return list.iterator();
+  }
+
+  @Test (dataProvider = "validContacts")
+  public void testAddContact(ContactData contact) throws Exception {
     Contacts before = app.contact().all();
     File photo  = new File("src/test/resources/test.png");
-    ContactData contact = new ContactData().withFirstname("NameХ").withLastname("LastNameХ")
-            .withAddress("address").withPhoto(photo).withEmail("test@mail.ru").withGroup("1");
     app.contact().create(contact, true);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
