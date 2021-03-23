@@ -12,8 +12,11 @@ import static org.testng.Assert.assertEquals;
 public class ModificationContactTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactData().withFirstname("Name").withLastname("LastName").withAddress("address").withPhone("22-22-22").withEmail("test@mail.ru").withGroup("1"), true);
+    if(app.db().contacts().size() == 0){
+      app.contact().create(new ContactData().withFirstname("Name").withLastname("LastName").withAddress("address").withEmail("test@mail.ru")
+              .withEmail2("Email2").withEmail3("Email3")
+              .withHomePhone("home").withWorkPhone("work").withMobilePhone("mobile")
+              .withGroup("1"), true);
     }
   }
 
@@ -21,15 +24,17 @@ public class ModificationContactTests extends TestBase {
   public void testContactModification() throws InterruptedException {
 
     app.goTo().HomePage();
-
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
-            .withId(modifiedContact.getId()).withFirstname("modfirstname").withLastname("modlastname").withAddress("modadress").withPhone("223322").withEmail("modemail").withGroup(null);
+            .withId(modifiedContact.getId()).withFirstname("modfirstname").withLastname("modlastname").withAddress("modadress")
+            .withEmail("modtest@mail.ru").withEmail2("modEmail2").withEmail3("modEmail3")
+            .withHomePhone("modhome").withWorkPhone("modwork").withMobilePhone("modmobile")
+            .withEmail("modemail").withGroup(null);
     app.contact().modify(contact);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 
   }

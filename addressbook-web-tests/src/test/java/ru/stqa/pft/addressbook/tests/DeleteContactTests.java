@@ -12,19 +12,19 @@ import static org.testng.Assert.assertEquals;
 public class DeleteContactTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactData().withFirstname("Name").withLastname("LastName").withAddress("address").withPhone("22-22-22").withEmail("test@mail.ru").withGroup("1"), true);
+    if (app.db().contacts().size() == 0) {
+      app.contact().create(new ContactData().withFirstname("Name").withLastname("LastName").withAddress("address").withEmail("test@mail.ru").withGroup("1"), true);
     }
   }
 
   @Test
   public void testDeleteContact() throws InterruptedException {
     app.goTo().HomePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
     assertThat(app.contact().count(), equalTo(before.size() - 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
   }
 

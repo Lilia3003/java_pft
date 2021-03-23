@@ -23,6 +23,6 @@ public class NavigationHelper extends HelperBase {
       return;
     }
     click(By.linkText("home page"));
-    Thread.sleep(3000);
+    Thread.sleep(5000);
   }
 }

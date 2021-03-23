@@ -2,16 +2,34 @@
   {
     "firstname": "firstname 0",
     "lastname": "lastname 0",
-    "address": "address 0"
+    "address": "address 0",
+    "email": "email 0",
+    "email2": "email2 0",
+    "email3": "email3 0",
+    "home": "home 0",
+    "mobile": "mobile 0",
+    "work": "work 0"
   },
   {
     "firstname": "firstname 1",
     "lastname": "lastname 1",
-    "address": "address 1"
+    "address": "address 1",
+    "email": "email 1",
+    "email2": "email2 1",
+    "email3": "email3 1",
+    "home": "home 1",
+    "mobile": "mobile 1",
+    "work": "work 1"
   },
   {
     "firstname": "firstname 2",
     "lastname": "lastname 2",
-    "address": "address 2"
+    "address": "address 2",
+    "email": "email 2",
+    "email2": "email2 2",
+    "email3": "email3 2",
+    "home": "home 2",
+    "mobile": "mobile 2",
+    "work": "work 2"
   }
 ]
