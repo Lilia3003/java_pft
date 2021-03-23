@@ -7,7 +7,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ModificationContactTests extends TestBase {
   @BeforeMethod
@@ -29,14 +28,14 @@ public class ModificationContactTests extends TestBase {
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId()).withFirstname("modfirstname").withLastname("modlastname").withAddress("modadress")
             .withEmail("modtest@mail.ru").withEmail2("modEmail2").withEmail3("modEmail3")
-            .withHomePhone("modhome").withWorkPhone("modwork").withMobilePhone("modmobile")
-            .withEmail("modemail").withGroup(null);
+            .withHomePhone("modhome").withWorkPhone("modwork").withMobilePhone("modmobile").withGroup(null);
     app.contact().modify(contact);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 
+    verifyContactListInUI();
   }
 
 

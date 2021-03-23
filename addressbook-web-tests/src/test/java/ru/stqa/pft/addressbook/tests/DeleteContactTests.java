@@ -7,7 +7,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class DeleteContactTests extends TestBase {
   @BeforeMethod
@@ -26,6 +25,8 @@ public class DeleteContactTests extends TestBase {
     assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
+
+    verifyContactListInUI();
   }
 
 
