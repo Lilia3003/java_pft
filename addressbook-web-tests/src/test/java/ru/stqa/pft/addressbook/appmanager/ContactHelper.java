@@ -99,6 +99,8 @@ public class ContactHelper extends HelperBase {
     acceptAlertDeletionContact();
   }
 
+  public 
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }

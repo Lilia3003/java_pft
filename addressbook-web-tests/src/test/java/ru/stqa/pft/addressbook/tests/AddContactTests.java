@@ -79,7 +79,7 @@ public class AddContactTests extends TestBase {
   @Test(enabled = false)
   public void testBadAddContact() throws Exception {
     Contacts before = app.db().contacts();
-    ContactData contact = new ContactData().withFirstname("NameХ'").withLastname("LastNameХ").withAddress("address").withEmail("test@mail.ru").withGroup("1");
+    ContactData contact = new ContactData().withFirstname("NameХ'").withLastname("LastNameХ").withAddress("address").withEmail("test@mail.ru");
     app.contact().create(contact, true);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size()));
